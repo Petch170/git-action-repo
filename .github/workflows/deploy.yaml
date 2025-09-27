@@ -6,10 +6,10 @@ on:
       - features/** #ทุก branch ของ features จะทำงาน
     #   - "!features/authen"  #ถ้ามี ! จะไม่ทำงาน
   workflow_dispatch:
-#   pull_request:
-#     types:
-#         # event เกิด workflow จะดูว่าเป็น opened ไหม ถ้าเป็น opened จะทํางาน
-#       - opened
+  pull_request:
+    types:
+        # event เกิด workflow จะดูว่าเป็น opened ไหม ถ้าเป็น opened จะทํางาน
+      - opened
 jobs:
   build:
     #   lint:
@@ -17,7 +17,18 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v5
-      - name: Install dependencies
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - uses: actions/cache@v4
+        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencie
         run: npm i
       #   - name: Lint
       #     run: npm run lint
@@ -28,7 +39,7 @@ jobs:
       - name: Upload dist
         uses: actions/upload-artifact@v4
         with:
-          name: build-folder
+          name: dist-folder
           path: dist/
 
   deploy:
