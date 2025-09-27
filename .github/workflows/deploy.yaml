@@ -1,8 +1,11 @@
 name: Deploy React CSR
 on:
-  push:
+#   push:
   workflow_dispatch:
   pull_request:
+    types: 
+        # event เกิด workflow จะดูว่าเป็น opened ไหม ถ้าเป็น opened จะทํางาน
+      - opened
 jobs:
   lint:
     runs-on: ubuntu-latest
