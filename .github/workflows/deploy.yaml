@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: List dist/
-        run: ls dist
+        run: ls -l dist
       - name: Upload dist
         uses: actions/upload-artifact@v4
         with:
@@ -59,7 +59,7 @@ jobs:
         with:
           name: build-folder
           path: dist/
-      - name: List dist/
+      - name: List all files/
         run: ls dist
       - name: Deploy
         run: echo "Deployedssss.."
