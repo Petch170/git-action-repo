@@ -10,11 +10,21 @@ on:
     types:
         # event เกิด workflow จะดูว่าเป็น opened ไหม ถ้าเป็น opened จะทํางาน
       - opened
+env:
+    NPM_VERSION: '1.2.18'
 jobs:
   build:
     #   lint:
     runs-on: ubuntu-latest
     steps:
+      - name: Use env variable
+        run: echo "npm version:{{ $NPM_VERSION}}"
+      - name: Use repo variable
+        run: echo "test URL ${{ vars.TEST_URL}}"
+     
+
+
+
       - name: Clone repo
         uses: actions/checkout@v5
       - name: Get npm cache directory
