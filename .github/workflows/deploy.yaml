@@ -53,5 +53,5 @@ jobs:
       - name: List dist/
         run: ls dist
       - name: Deploy
-        run : echo "Deployed.."
+        run : echo "Deployedssss.."
       
