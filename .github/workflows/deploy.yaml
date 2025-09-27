@@ -57,7 +57,7 @@ jobs:
       - name: Download dist
         uses: actions/download-artifact@v4
         with:
-          name: build-folder
+          name: dist-folder
           path: dist/
       - name: List all files/
         run: ls dist
