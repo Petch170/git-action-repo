@@ -15,7 +15,14 @@ on:
 jobs:
   build:
     #   lint:
+    # environment: developmentClound
     runs-on: ubuntu-latest
+    # ถ้าใส่ container  step จะรันใน container เลย
+    container: 
+      image: oven/bun:1
+      env:
+        # POSTGRES_PASSWORD: postgres
+        NODE_ENV: development
     steps:
       - name: Use env variable
         run: echo "npm version:{{ $NPM_VERSION}}"
