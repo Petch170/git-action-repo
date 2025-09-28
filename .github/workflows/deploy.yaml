@@ -50,8 +50,8 @@ jobs:
           path: dist/
 
       # บังคับให้ออก เพื่อให้ build fail
-      - name: Forece fail
-        run: exit 1
+      # - name: Forece fail
+      #   run: exit 1
 
   deploy:
     # ทำงานเมื่อ branchrefs/heads/main
@@ -125,4 +125,4 @@ jobs:
           DISCORD_WEBHOOK: https://discord.com/api/webhooks/1421697869458706533/W2UqZa7gD95EU7ixa4gQN3QLz3pWc3oFepvpv16XWxfpuMMTTiqbNULZWrBBmPfPlYBY
         uses: Ilshidur/action-discord@master
         with:
-          args: "build ผ่านแล้ววววววว ${{github.sha}} by meee"
+          args: "build ผ่านแล้ววววววว ${{github.sha}} by ${{github.actor}} "
