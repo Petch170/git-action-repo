@@ -19,3 +19,4 @@ runs:
             ${{ runner.os }}-node-
     - name: Install dependencie
       run: npm i
+      shell: bash
