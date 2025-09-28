@@ -4,8 +4,8 @@ description: Install deps and catching
 runs:
   using: composite
   steps:
-    - name: Clone repo
-      uses: actions/checkout@v5
+    # - name: Clone repo
+    #   uses: actions/checkout@v5
     - name: Get npm cache directory
       id: npm-cache-dir
       shell: bash

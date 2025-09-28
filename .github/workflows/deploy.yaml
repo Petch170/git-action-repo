@@ -46,14 +46,8 @@ jobs:
       #   run: exit 1
 
   deploy:
-    # ทำงานเมื่อ branchrefs/heads/main
-    # if: ${{ github.ref == 'refs/heads/main' }}
-
-    # ทำงานเมื่อ job ข้างบนสำเร็จ ให้ไปทำ notifyต่อ     # check ใน  needs ทั้งหมด ว่า success ไหม ถ้าผ่านทั้งหมด
     if: ${{ success() }}
 
-    # needs:
-    #   - lint
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -73,37 +67,19 @@ jobs:
       - name: Deploy
         run: echo "Deployedssss.."
 
-        #ถ้าต้องการให้โชว์ noti ทั้ง fail  และsuccess ให้ทำ notify 2 อัน
-  # notify:
+  # notify-fail:
   #   runs-on: ubuntu-latest
   #   needs:
   #     - build
   #     - deploy
-  #     # check ใน  needs ทั้งหมด ว่า fail ไหม ถ้ามีfail จะทำงาน(มี1อันก็ทำงาน)
-  #   # if: failure()
-  #   # check ทั้งหมด
-  #   if: always()
+  #   if: failure()
   #   steps:
   #     - name: Notify Discord noti
   #       env:
   #         DISCORD_WEBHOOK: https://discord.com/api/webhooks/1421697869458706533/W2UqZa7gD95EU7ixa4gQN3QLz3pWc3oFepvpv16XWxfpuMMTTiqbNULZWrBBmPfPlYBY
   #       uses: Ilshidur/action-discord@master
   #       with:
-  #         args: "build  ${{github.sha}} by meee"
-
-  notify-fail:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - deploy
-    if: failure()
-    steps:
-      - name: Notify Discord noti
-        env:
-          DISCORD_WEBHOOK: https://discord.com/api/webhooks/1421697869458706533/W2UqZa7gD95EU7ixa4gQN3QLz3pWc3oFepvpv16XWxfpuMMTTiqbNULZWrBBmPfPlYBY
-        uses: Ilshidur/action-discord@master
-        with:
-          args: "build พัง ไปแก้ใหม่ ${{github.sha}} by meee"
+  #         args: "build พัง ไปแก้ใหม่ ${{github.sha}} by meee"
 
   notify-success:
     runs-on: ubuntu-latest
@@ -117,4 +93,4 @@ jobs:
           DISCORD_WEBHOOK: https://discord.com/api/webhooks/1421697869458706533/W2UqZa7gD95EU7ixa4gQN3QLz3pWc3oFepvpv16XWxfpuMMTTiqbNULZWrBBmPfPlYBY
         uses: Ilshidur/action-discord@master
         with:
-          args: "build ผ่านแล้ววววววว ${{github.sha}} by ${{github.actor}} "
+          args: "build success ${{github.sha}} by ${{github.actor}} "
