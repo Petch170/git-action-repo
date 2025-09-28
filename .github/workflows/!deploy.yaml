@@ -18,16 +18,17 @@ jobs:
     # environment: developmentClound
     runs-on: ubuntu-latest
     # ถ้าใส่ container  step จะรันใน container เลย
-    container: 
+    container:
       image: node
       env:
         # POSTGRES_PASSWORD: postgres
         NODE_ENV: development
     steps:
-      # name clone ถูกย้ายไปที่action แล้ว 
+      - name: Clone repo
+        uses: actions/checkout@v5
       - name: Install and caching dependencie
         uses: ./.github/actions/install-cache
-      
+
       #   - name: Lint
       #     run: npm run lint
       - name: Build
