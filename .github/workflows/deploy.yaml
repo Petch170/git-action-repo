@@ -50,8 +50,8 @@ jobs:
           path: dist/
 
       # บังคับให้ออก เพื่อให้ build fail
-      # - name: Forece fail
-      #   run: exit 1
+      - name: Forece fail
+        run: exit 1
 
   deploy:
     # ทำงานเมื่อ branchrefs/heads/main
