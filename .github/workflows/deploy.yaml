@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
   pull_request:
     types:
-        # event เกิด workflow จะดูว่าเป็น opened ไหม ถ้าเป็น opened จะทํางาน
+      # event เกิด workflow จะดูว่าเป็น opened ไหม ถ้าเป็น opened จะทํางาน
       - opened
-env:
-    NPM_VERSION: '1.2.18'
+# env:
+#   NPM_VERSION: "10.9.2"
 jobs:
   build:
     #   lint:
@@ -20,11 +20,7 @@ jobs:
       - name: Use env variable
         run: echo "npm version:{{ $NPM_VERSION}}"
       - name: Use repo variable
-        run: echo "test URL ${{ vars.TEST_URL}}"
-     
-
-
-
+        run: echo "test URL:{{ vars.TEST_URL}}"
       - name: Clone repo
         uses: actions/checkout@v5
       - name: Get npm cache directory
@@ -53,6 +49,8 @@ jobs:
           path: dist/
 
   deploy:
+    # ในif เอา ${{}} ออกได้ ${{ github.ref == 'refs/heads/main' }}
+    if: github.ref == 'refs/heads/main' 
     # needs:
     #   - lint
     runs-on: ubuntu-latest
